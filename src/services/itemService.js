@@ -1,3 +1,4 @@
+import { Search } from "lucide-react";
 import api from "./api";
 
 export const getItems = async (params = {}) => {
@@ -15,3 +16,14 @@ export const getItemById = async (id) => {
 
   return response.data;
 };
+
+
+export const getRecommendations=async (item)=>{
+  const response=await api.get("/api/items",
+    {
+      params:{
+        search: item,
+      },
+    });
+    return response.data;
+  };

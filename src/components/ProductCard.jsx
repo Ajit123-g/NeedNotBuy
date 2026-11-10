@@ -1,42 +1,48 @@
-function ProductCard({ item, onViewDetails }) {
+import { Link } from "react-router-dom";
+
+function ProductCard({ item }) {
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm
-      border border-gray-100 overflow-hidden
-      hover:shadow-lg transition">
+    <div className="bg-white rounded-2xl shadow-md overflow-hidden">
 
-      <img
-        src={item.image_url || "/placeholder.png"}
-        alt={item.title}
-        className="w-full h-48 object-cover"
-      />
+      {item.image_url && (
+        <img
+          src={item.image_url}
+          alt={item.title}
+          className="w-full h-48 object-cover"
+        />
+      )}
 
       <div className="p-5">
 
-        <span className="text-sm text-green-700
-          bg-green-50 px-3 py-1 rounded-full">
+        <span className="text-sm font-medium">
           {item.type}
         </span>
 
-        <h2 className="font-bold text-lg mt-3">
+        <h2 className="text-xl font-bold mt-2">
           {item.title}
         </h2>
 
-        <p className="text-gray-500 text-sm mt-2">
+        <p className="text-gray-600 mt-2">
           {item.description}
         </p>
 
-        <p className="font-bold text-xl mt-4">
+        <h3 className="text-lg font-bold mt-4">
           ₹{item.price}
-        </p>
+        </h3>
 
-        <button
-          onClick={() => onViewDetails(item.id)}
-          className="w-full mt-4 bg-green-600
-            text-white p-3 rounded-xl"
+        {item.deposit > 0 && (
+          <p className="text-sm">
+            Deposit: ₹{item.deposit}
+          </p>
+        )}
+
+        <Link
+          to={`/items/${item.id}`}
+          className="block mt-4 text-center bg-green-600 text-white p-3 rounded-xl"
         >
           View Details
-        </button>
+        </Link>
 
       </div>
 
